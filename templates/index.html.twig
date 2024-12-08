@@ -1,0 +1,161 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block content %}
+
+    {# En tête accueil #}
+    <section class="section1">
+        <div class="inner">
+            <div class="owl-one owl-home owl-carousel owl-theme">
+                {% for header in headers %}
+                    <div class="slide-item" style="background-image:url({{ asset('img/upload/' ~ header.image) }})">
+                        <div class="headerSlide">
+                            <div class="headerSlideContent">
+                                <h1>{{ header.title }}</h1>
+
+                                <div class="headerSlideResume">
+                                    <p>{{ header.resume }}</p>
+                                </div>
+
+                                {% if header.link is not null %}
+                                    <div class="headerPortailLink">
+                                        <a href="{{ header.link }}" class="btn">En savoir plus</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# Mise en avant a propos block #}
+    <section class="section section2">
+        <div class="inner">
+            <p>Mise en avant (à faire)</p>
+            <div class="background2"><img src="{{ asset('img/background2.png') }}"></div>
+        </div>
+
+        <div class="background1"><img src="{{ asset('img/background1.png') }}"></div>
+    </section>
+
+    {# Les deniéres plantes #}
+    <section class="section section3">
+        <div class="inner">
+
+            <div class="titre">
+                <h2>Découvrez la diversité des plantes aquatiques pour vos mares</h2>
+            </div>
+        
+            {# Catégories liste #}
+            <div class="categoriesListe">
+                <ul>
+                    <li><a href="#">Toutes</a></li>
+                    {% for plantecategorie in plantescategorie %}
+                        <li><a href="#">{{ plantecategorie.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# Plantes liste #}
+            <div class="plantesListe owl-two owl-carousel owl-theme">
+                {% for plante in plantes %}
+                    <div class="planteListe" class="slide-item">
+                        <div class="planteListeContainer">
+                            <div class="planteListeImg">
+                                <img src="{{ asset('img/miniature/' ~ plante.image) }}">
+                            </div>
+                            <div class="planteListeContent">
+                                <div class="planteListeTitle">
+                                    <h4>{{ plante.title }}</h4>
+                                </div>
+
+                                <div class="planteListeResume">
+                                    <p>{{ plante.resume|truncate(70) }}</p>
+                                </div>
+
+                                <div class="planteListeBtn">
+                                    <a href="#" class="btn link">Voir la plante</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="btnAll">
+                <a href="#" class="btn bleu">voir toutes nos plantes</a>
+            </div>
+
+            <div class="titre center titre1">
+                <h2>Nos création &<br/>conception de bassins</h2>
+            </div>
+
+        </div>
+
+        <div class="background3"><img src="{{ asset('img/background3.png') }}"></div>
+    </section>
+
+    {# Les deniéres mares #}
+    <section class="section section4">
+
+        <div class="maresSlides">
+            {% for mare in mares %}
+                <div class="maresSlide">
+                    <img src="{{ asset('img/upload/' ~ mare.imageapres) }}">
+                    <div class="maresSlideContent">
+                        <h2>{{ mare.title }}</h2>
+
+                        <div class="maresSlideResume">
+                            <p>{{ mare.resume }}</p>
+                        </div>
+
+                        <div class="maresSlideLink">
+                            <a href="#" class="btn">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+    {# Les statistiques #}
+    <section class="section section5">
+        <div class="inner">
+            <div class="statistiquesListe">
+                {% for statistique in statistiques %}
+                    <div class="statistiqueListe">
+                        <div class="statistiqueChiffre">
+                            <p>{{ statistique.chiffre }}</p>
+                        </div>
+                        <div class="statistiqueTitle">
+                            <h4>{{ statistique.title }}</h4>
+                        </div>
+                        <div class="statistiqueContenu">
+                            <p>{{ statistique.contenu }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="background1"><img src="{{ asset('img/background1.png') }}"></div>
+    </section>
+
+    {# A propos #}
+    <section class="section section6">
+        <div class="inner">
+            <p>A propos (à faire)</p>
+        </div>
+
+        <div class="background4"><img src="{{ asset('img/background4.png') }}"></div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}

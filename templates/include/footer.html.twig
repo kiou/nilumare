@@ -1,0 +1,28 @@
+<section class="section section9">
+    <div class="inner">
+
+        <div class="footerCircle">
+            <div class="footerLogo">
+                <img src="{{ asset('img/upload/' ~ logos.logofooter) }}">
+            </div>
+
+            <div class="footerContent">
+                <p>Plongez dans l’univers des marées éco-responsables et durable. Notre engagement est de protéger la biodiversité tout en promouvant des pratiques respectueuses de l’environnement. Que ce soit à travers l’aquaculture durable, la gestion des ressources ou la réduction de l’empreinte écologique, nous œuvrons pour un avenir où les richesses sont préservés. </p>
+            </div>
+
+            <div class="footerReseaux">
+                {% if logos.facebook is not null %}
+                    <a href="{{ logos.facebook }}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                {% endif %}
+                {% if logos.instagram is not null %}
+                    <a href="{{ logos.instagram }}" target="_blank"><i class="fab fa-instagram-square"></i></a>
+                {% endif %}
+                {% if logos.linkedin is not null %}
+                    <a href="{{ logos.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <img src="{{ asset('img/backgroundfooter.jpg') }}">
+    </div>
+</section>

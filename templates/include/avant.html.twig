@@ -1,0 +1,20 @@
+<section class="section section7">
+    <div class="inner">
+        <img src="{{ asset('img/upload/' ~ avant.image) }}">
+        <div class="avantContainer">
+            <div class="avantContent">
+                <h2>{{ avant.title }}</h2>
+
+                {% if avant.link is not null %}
+                    <div class="avantLink">
+                        {% if avant.linkname is not null %}
+                            <a href="{{ avant.link }}" class="btn bleu" target="_blank">{{ avant.linkname }}</a>
+                        {% else %}
+                            <a href="{{ avant.link }}" class="btn bleu">En savoir plus</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,71 @@
+<section class="section section8">
+    <div class="inner">
+
+        <div class="titre">
+            <h2>Les dernières tendances<br>de Nilumare</h2>
+        </div>
+
+        <div class="actualitesListe">
+            {% for firstActualite in firstActualites %}
+                <div class="actualiteListe top">
+                    <div class="actualiteListeContainer">
+                        <div class="actualiteListeImg">
+                            <img src="{{ asset('img/miniature/' ~ firstActualite.image) }}">
+                        </div>
+                        <div class="actualiteListeContent">
+                            <div class="actualiteListeDate">
+                                <p><i class="fas fa-calendar-alt"></i> {{ firstActualite.created|date('d/m/Y') }}</p>
+                            </div>
+
+                            <div class="actualiteListeTitle">
+                                <h4>{{ firstActualite.title }}</h4>
+                            </div>
+
+                            <div class="actualiteListeResume">
+                                <p>{{ firstActualite.resume|truncate(140) }}</p>
+                            </div>
+
+                            <div class="actualiteListeBtn">
+                                <a href="#" class="btn link">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for nextActualite in nextActualites %}
+                <div class="actualiteListe bottom">
+                    <div class="actualiteListeContainer">
+                        <div class="actualiteListeImg">
+                            <img src="{{ asset('img/miniature/' ~ nextActualite.image) }}">
+                        </div>
+                        <div class="actualiteListeContent">
+                            <div class="actualiteListeDate">
+                                <p><i class="fas fa-calendar-alt"></i> {{ nextActualite.created|date('d/m/Y') }}</p>
+                            </div>
+
+                            <div class="actualiteListeTitle">
+                                <h4>{{ nextActualite.title }}</h4>
+                            </div>
+
+                            <div class="actualiteListeResume">
+                                <p>{{ nextActualite.resume|truncate(140) }}</p>
+                            </div>
+
+                            <div class="actualiteListeBtn">
+                                <a href="#" class="btn link">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="btnAll">
+            <a href="#" class="btn bleu">voir tous les articles</a>
+        </div>
+
+    </div>
+
+    <div class="background3"><img src="{{ asset('img/background3.png') }}"></div>
+</section>
