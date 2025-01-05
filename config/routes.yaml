@@ -4,3 +4,37 @@ app_index:
 
 app_logout:
     path: /logout
+
+app_plantes_index:
+    path: /vente-de-plante-aquatique/{categorie}
+    controller: App\Controller\PlanteController::index
+    requirements:
+        categorie: '\d*'
+    defaults:
+        categorie: null
+    
+app_plantes_show:
+    path:     /plante/{slug}/{id}
+    defaults: { _controller: App\Controller\PlanteController::show }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
+app_actualites_index:
+    path: /actualites
+    controller: App\Controller\ActualiteController::index
+
+app_actualites_show:
+    path:     /actualite/{slug}/{id}
+    defaults: { _controller: App\Controller\ActualiteController::show }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
+app_contact_index:
+    path: /contactez-nous
+    controller: App\Controller\ContactController::index
+
+sendcontact:
+    path: contact-validation
+    controller: App\Controller\ContactController::send

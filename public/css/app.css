@@ -229,8 +229,18 @@
 }
 
 /* Plantes liste */
+.section3Page .inner{
+    padding: 80px 0px;
+}
+
+.planteListe.page{
+    width: calc((100% / 3) - 40px);
+}
+
 .plantesListe{
     margin: 0px -20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .planteListe{
@@ -249,6 +259,7 @@
 }
 
 .planteListeImg img{
+    width: 100%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
@@ -416,6 +427,7 @@
 .section7 .inner{
     max-width: 1780px;
     border-radius: 60px;
+    margin-bottom: 120px;
 }
 
 .section7 .inner img{
@@ -459,7 +471,6 @@
 
 /* Actualités */
 .section8 .inner{
-    padding: 120px 0px;
     max-width: 1170px;
     z-index: 3;
 }
@@ -468,10 +479,21 @@
     padding: 50px 0px;
 }
 
+.section13 .inner{
+    padding: 80px 0px;
+    max-width: 1170px;
+}
+
 .actualitesListe{
     display: flex;
     margin: 0px -20px;
     flex-wrap: wrap;
+}
+
+/* Page Liste */
+.section10 .inner{
+    max-width: 1170px;
+    padding: 80px 0px;
 }
 
 .actualiteListe.top{
@@ -585,4 +607,97 @@
     border-radius: 50%;
     padding: 10px 13px;
     margin: 0px 15px;
+}
+
+/* Header classique */
+.headerPage .inner{
+    max-width: 1920px;
+}
+
+.headerPageContent {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    height: 550px;
+}
+
+.headerPageTitle {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.headerPageTitle h1{
+    margin-bottom: 0px;
+    text-shadow:1px 1px 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.headerPageTitleInner{
+    padding: 0px 20%;
+    width: 100%;
+    text-align: center;
+}
+
+/* Contact */
+.section12 .inner{
+    padding: 80px 0px;
+    max-width: 1170px;
+}
+
+.formulaireContent{
+    max-width: 600px;
+    margin: 0px auto;
+}
+
+/* Une plante */
+.section11 .inner{
+    padding: 200px 0px 80px 0px;
+    max-width: 1170px;
+}
+
+.planteContainer{
+    display: flex;
+}
+
+.planteLeft{
+    width: calc(55% - 60px);
+    margin-right: 60px;
+}
+
+.planteLeft img{
+    border-radius: 60px;
+}
+
+.planteStock{
+    margin-bottom: 20px;
+}
+
+.planteCategorie{
+    margin-bottom: 40px;
+}
+
+.planteDescription{
+    margin-bottom: 40px;
+}
+
+.planteRight{
+    width: 45%;
+}
+
+/* Plantes de la même catégorie */
+.section14{
+    background-color: #FAFCF5;
+    margin-bottom: 80px;
+}
+
+.section14 .inner{
+    padding: 80px 0px;
+    max-width: 1170px;
+
 }

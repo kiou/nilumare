@@ -21,12 +21,22 @@ class PlantesRepository extends ServiceEntityRepository
         parent::__construct($registry, Plantes::class);
     }
 
-    public function getPlantes()
+    public function getPlantes($categorie = null, $excludeId = null)
     {
         $qb = $this->createQueryBuilder('p');
 
         $qb->andWhere('p.isActive =  :isActive')
             ->setParameter('isActive', true);
+
+        if(!is_null($categorie)){
+            $qb->andWhere('p.plantescategorie = :categorie')
+                ->setParameter('categorie', $categorie);
+        }
+
+        if (!is_null($excludeId)) {
+            $qb->andWhere('p.id != :excludeId')
+                ->setParameter('excludeId', $excludeId);
+        }
 
         $qb->orderBy('p.id', 'DESC');
    

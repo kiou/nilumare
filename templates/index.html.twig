@@ -50,9 +50,9 @@
             {# Catégories liste #}
             <div class="categoriesListe">
                 <ul>
-                    <li><a href="#">Toutes</a></li>
+                    <li><a href="{{ path('app_plantes_index') }}">Toutes</a></li>
                     {% for plantecategorie in plantescategorie %}
-                        <li><a href="#">{{ plantecategorie.name }}</a></li>
+                        <li><a href="{{ path('app_plantes_index',{'categorie': plantecategorie.id}) }}">{{ plantecategorie.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -75,7 +75,7 @@
                                 </div>
 
                                 <div class="planteListeBtn">
-                                    <a href="#" class="btn link">Voir la plante</a>
+                                    <a href="{{ path('app_plantes_show',{'slug': plante.slug, 'id': plante.id})}}" class="btn link">Voir la plante</a>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="btnAll">
-                <a href="#" class="btn bleu">voir toutes nos plantes</a>
+                <a href="{{ path('app_plantes_index') }}" class="btn bleu">voir toutes nos plantes</a>
             </div>
 
             <div class="titre center titre1">

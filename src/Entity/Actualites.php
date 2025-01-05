@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ActualitesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name : "actualites")]
 #[ORM\HasLifecycleCallbacks]

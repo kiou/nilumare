@@ -1,0 +1,71 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>Vente de plante aquatique</title>{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header1.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>Vente de plante aquatique</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Les deniéres plantes #}
+    <section class="section section3 section3Page">
+        <div class="inner">
+
+            {# Catégories liste #}
+            <div class="categoriesListe">
+                <ul>
+                    <li><a href="{{ path('app_plantes_index') }}">Toutes</a></li>
+                    {% for plantecategorie in plantescategorie %}
+                        <li><a href="{{ path('app_plantes_index',{'categorie': plantecategorie.id}) }}">{{ plantecategorie.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# Plantes liste #}
+            <div class="plantesListe">
+                {% for plante in plantes %}
+                    <div class="planteListe page">
+                        <div class="planteListeContainer">
+                            <div class="planteListeImg">
+                                <img src="{{ asset('img/miniature/' ~ plante.image) }}">
+                            </div>
+                            <div class="planteListeContent">
+                                <div class="planteListeTitle">
+                                    <h4>{{ plante.title }}</h4>
+                                </div>
+
+                                <div class="planteListeResume">
+                                    <p>{{ plante.resume|truncate(70) }}</p>
+                                </div>
+
+                                <div class="planteListeBtn">
+                                    <a href="{{ path('app_plantes_show',{'slug': plante.slug, 'id': plante.id})}}" class="btn link">Voir la plante</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="background3"><img src="{{ asset('img/background3.png') }}"></div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}

@@ -21,15 +21,21 @@ class ActualitesRepository extends ServiceEntityRepository
         parent::__construct($registry, Actualites::class);
     }
 
-    public function getLimitActualites($first, $max)
+    public function getLimitActualites($first = null, $max = null)
     {
         $qb = $this->createQueryBuilder('a');
 
-        $qb->andWhere('a.isActive =  :isActive')
+        if(!is_null($first) || !is_null($max)){
+            $qb->andWhere('a.isActive =  :isActive')
             ->setParameter('isActive', true)
             ->orderBy('a.id', 'DESC')
             ->setFirstResult($first)
             ->setMaxResults($max);
+        }else{
+            $qb->andWhere('a.isActive =  :isActive')
+            ->setParameter('isActive', true)
+            ->orderBy('a.id', 'DESC');
+        }
    
         return $qb->getQuery()->getResult();
     }

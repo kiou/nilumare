@@ -1,0 +1,40 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>{{ actualite.title }}</title>{% endblock %}
+{% block metadescription %} <meta name="description" content="{{ actualite.resume }}">{% endblock %}
+
+{% block opengraph %}
+    <meta property="og:title" content="Nilumare - {{ actualite.title }}">
+    <meta property="og:description" content="{{ actualite.resume }}">
+    <meta property="og:url" content="#base{{app.request.getBaseURL() ~ path('app_actualites_show',{'slug': actualite.slug, 'id': actualite.id})}}">
+    <meta property="og:image" content="#base{{ asset('img/upload/' ~ actualite.image) }}">
+{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image: url({{ asset('img/upload/' ~ actualite.image) }});">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>{{ actualite.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section13 pageContent">
+        <div class="inner">
+            {{ actualite.content|raw }}
+        </div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}

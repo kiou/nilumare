@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use App\Entity\MaresCategories;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MaresRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name : "mares")]
 #[ORM\HasLifecycleCallbacks]

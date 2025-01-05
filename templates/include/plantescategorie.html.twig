@@ -1,0 +1,39 @@
+<section class="section section14">
+    <div class="inner">
+
+        <div class="titre center">
+            <h2>Complétez avec ces autres plantes</h2>
+        </div>
+
+        <div class="plantesListe">
+            {% for plante in plantes %}
+                <div class="planteListe page">
+                    <div class="planteListeContainer">
+                        <div class="planteListeImg">
+                            <img src="{{ asset('img/miniature/' ~ plante.image) }}">
+                        </div>
+                        <div class="planteListeContent">
+                            <div class="planteListeTitle">
+                                <h4>{{ plante.title }}</h4>
+                            </div>
+
+                            <div class="planteListeResume">
+                                <p>{{ plante.resume|truncate(70) }}</p>
+                            </div>
+
+                            <div class="planteListeBtn">
+                                <a href="{{ path('app_plantes_show',{'slug': plante.slug, 'id': plante.id})}}" class="btn link">Voir la plante</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="btnAll">
+            <a href="{{ path('app_plantes_index') }}" class="btn bleu">voir toutes nos plantes</a>
+        </div>
+
+    </div>
+
+</section>

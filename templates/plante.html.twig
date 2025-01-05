@@ -1,0 +1,63 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>{{ plante.title }}</title>{% endblock %}
+{% block metadescription %} <meta name="description" content="{{ plante.resume }}">{% endblock %}
+
+{% block opengraph %}
+    <meta property="og:title" content="Nilumare - {{ plante.title }}">
+    <meta property="og:description" content="{{ plante.resume }}">
+    <meta property="og:url" content="#base{{app.request.getBaseURL() ~ path('app_plantes_show',{'slug': plante.slug, 'id': plante.id})}}">
+    <meta property="og:image" content="#base{{ asset('img/upload/' ~ plante.image) }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="section section11">
+        <div class="inner">
+
+            <div class="planteContainer">
+                <div class="planteLeft">
+                    <div class="owl-three owl-carousel owl-theme">
+                        {% for image in plante.planteimages %}
+                            <div class="slide-item">
+                                <img src="{{ asset('img/upload/' ~ image.url) }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="planteRight">
+                    <h2>{{ plante.title }}</h2>
+
+                    <div class="planteStock">
+                        {% if plante.stock == true %}
+                            <span class="badge succes">En stock</span>
+                        {% else %}
+                            <span class="badge erreur">Victime de son succès</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="planteCategorie">
+                        <p><strong>Catégorie:</strong> {{ plante.plantescategorie.name }}</p> 
+                    </div>
+
+                    <div class="planteDescription pageContent">
+                        {{ plante.content|raw }}
+                    </div>
+
+                    <div class="planteDemande">
+                        <a href="{{ path('app_contact_index') }}" class="btn bleu">Faire votre demande pour cette plante</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {# Plantes de la même catégorie #}
+    {{ render(controller('App\\Controller\\PlanteController::view',{ 'categorie': plante.plantescategorie.id, 'excludeId': plante.id })) }} 
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+{% endblock %}

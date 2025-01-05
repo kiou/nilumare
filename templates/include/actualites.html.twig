@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="actualiteListeBtn">
-                                <a href="#" class="btn link">Lire l'article</a>
+                                <a href="{{ path('app_actualites_show',{'slug': firstActualite.slug, 'id': firstActualite.id})}}" class="btn link">Lire l'article</a>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="actualiteListeBtn">
-                                <a href="#" class="btn link">Lire l'article</a>
+                                <a href="{{ path('app_actualites_show',{'slug': nextActualite.slug, 'id': nextActualite.id})}}" class="btn link">Lire l'article</a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
         </div>
 
         <div class="btnAll">
-            <a href="#" class="btn bleu">voir tous les articles</a>
+            <a href="{{ path('app_actualites_index') }}" class="btn bleu">voir tous les articles</a>
         </div>
 
     </div>

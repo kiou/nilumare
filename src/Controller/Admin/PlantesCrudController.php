@@ -6,9 +6,10 @@ use Imagine\Image\Box;
 use App\Entity\Plantes;
 use Imagine\Gd\Imagine;
 use App\Utilities\Upload;
+use App\Form\Type\ImageTypePlante;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -17,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -84,11 +86,40 @@ class PlantesCrudController extends AbstractCrudController
                         ->thumbnail($size, 'outbound')
                         ->save($this->getUploadRootDir().'miniature/'.$image);
         });
+        yield CollectionField::new('planteimages','Galerie produit')
+            ->setEntryType(ImageTypePlante::class)
+            ->setFormTypeOptions([
+                'by_reference' => false,
+            ])
+            ->onlyOnForms();
         yield TextareaField::new('resume', 'Résumé')->hideOnIndex();
-        yield TextEditorField::new('content','Contenu')
+        yield TextEditorField::new('content','Contenu (Description)')
             ->hideOnIndex()
             ->setFormType(CKEditorType::class);   
+        yield BooleanField::new('stock','En stock ?');
         yield BooleanField::new('isActive','Actif');
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        foreach ($entityInstance->getPlanteimages() as $planteimages) {
+            $planteimages->upload();
+            $planteimages->setPlante($entityInstance);
+            $entityManager->persist($planteimages);
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        foreach ($entityInstance->getPlanteimages() as $planteimages) {
+            $planteimages->upload();
+            $planteimages->setPlante($entityInstance);
+            $entityManager->persist($planteimages);
+        }
+
+        parent::updateEntity($entityManager, $entityInstance);
     }
 
     public function getUploadRootDir()

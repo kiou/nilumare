@@ -1,0 +1,56 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>Actualités</title>{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header2.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>Actualités</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section10">
+        <div class="inner">
+            <div class="actualitesListe page">
+                {% for actualite in actualites %}
+                    <div class="actualiteListe bottom">
+                        <div class="actualiteListeContainer">
+                            <div class="actualiteListeImg">
+                                <img src="{{ asset('img/miniature/' ~ actualite.image) }}">
+                            </div>
+                            <div class="actualiteListeContent">
+                                <div class="actualiteListeDate">
+                                    <p><i class="fas fa-calendar-alt"></i> {{ actualite.created|date('d/m/Y') }}</p>
+                                </div>
+
+                                <div class="actualiteListeTitle">
+                                    <h4>{{ actualite.title }}</h4>
+                                </div>
+
+                                <div class="actualiteListeResume">
+                                    <p>{{ actualite.resume|truncate(140) }}</p>
+                                </div>
+
+                                <div class="actualiteListeBtn">
+                                    <a href="{{ path('app_actualites_show',{'slug': actualite.slug, 'id': actualite.id})}}" class="btn link">Lire l'article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+{% endblock %}

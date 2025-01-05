@@ -71,7 +71,7 @@ class ActualitesCrudController extends AbstractCrudController
                 );
 
                 $imagine = new Imagine();
-                $size = new Box(1920,1080);
+                $size = new Box(1920,550);
                 $imagine->open($file)
                         ->thumbnail($size, 'outbound')
                         ->save($this->getUploadRootDir().'upload/'.$image);

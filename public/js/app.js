@@ -25,9 +25,15 @@ $( document ).ready(function() {
 
     $(".owl-two").owlCarousel({
       loop:false,
-      items:4,
+      items:3,
       nav:false,
-  });
+    });
+
+    $(".owl-three").owlCarousel({
+      loop:false,
+      items:1,
+      nav:false,
+    });
 
 });
 

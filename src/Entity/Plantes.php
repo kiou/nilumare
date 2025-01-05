@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\PlantesCategorie;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlantesRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name : "plantes")]
 #[ORM\HasLifecycleCallbacks]
@@ -40,8 +43,14 @@ class Plantes
     #[ORM\Column(type : "string", length : 255, nullable:true)]
     private $image;
 
+    #[ORM\OneToMany(targetEntity: PlanteImage::class, mappedBy: 'plante', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private $planteimages;
+
     #[ORM\Column(name : "is_active", type : "boolean")]
     private $isActive;
+
+    #[ORM\Column(name : "stock", type : "boolean")]
+    private $stock;
 
     #[ORM\ManyToOne(targetEntity: PlantesCategorie::class, inversedBy: 'plantes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,6 +61,8 @@ class Plantes
     {
         $this->created = new \DateTime();
         $this->isActive = true;
+        $this->stock = true;
+        $this->planteimages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +180,48 @@ class Plantes
     public function setPlantescategorie(?PlantesCategorie $plantescategorie): static
     {
         $this->plantescategorie = $plantescategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlanteImage>
+     */
+    public function getPlanteimages(): Collection
+    {
+        return $this->planteimages;
+    }
+
+    public function addPlanteimage(PlanteImage $planteimage): static
+    {
+        if (!$this->planteimages->contains($planteimage)) {
+            $this->planteimages->add($planteimage);
+            $planteimage->setPlante($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanteimage(PlanteImage $planteimage): static
+    {
+        if ($this->planteimages->removeElement($planteimage)) {
+            // set the owning side to null (unless already changed)
+            if ($planteimage->getPlante() === $this) {
+                $planteimage->setPlante(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isStock(): ?bool
+    {
+        return $this->stock;
+    }
+
+    public function setStock(bool $stock): static
+    {
+        $this->stock = $stock;
 
         return $this;
     }

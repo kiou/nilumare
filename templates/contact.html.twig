@@ -1,0 +1,40 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>Contactez-nous</title>{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header3.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>Besoin d'en savoir plus ? Posez-nous vos questions</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section12 pageContent">
+        <div class="inner">
+            <div class="formulaireContent">
+                {{ form_start(form) }}
+
+                    {{ form_errors(form) }}
+
+                    {{ form_rest(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}
