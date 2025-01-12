@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Mares;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\PlantesCategorie;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlantesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name : "plantes")]
@@ -57,12 +58,21 @@ class Plantes
     #[Assert\NotBlank(message : "Compléter le champ catégorie")]
     private $plantescategorie;
 
+    #[ORM\ManyToMany(targetEntity: Mares::class, mappedBy: "plantes")]
+    private $mares;
+
     public function __construct()
     {
         $this->created = new \DateTime();
         $this->isActive = true;
         $this->stock = true;
         $this->planteimages = new ArrayCollection();
+        $this->mares = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -225,4 +235,32 @@ class Plantes
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Mares>
+     */
+    public function getMares(): Collection
+    {
+        return $this->mares;
+    }
+
+    public function addMare(Mares $mare): static
+    {
+        if (!$this->mares->contains($mare)) {
+            $this->mares->add($mare);
+            $mare->addPlante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMare(Mares $mare): static
+    {
+        if ($this->mares->removeElement($mare)) {
+            $mare->removePlante($this);
+        }
+
+        return $this;
+    }
+
 }

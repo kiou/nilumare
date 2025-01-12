@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Plantes;
+use App\Entity\Legendes;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\MaresCategories;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MaresRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name : "mares")]
@@ -55,10 +59,18 @@ class Mares
     #[Assert\NotBlank(message : "Compléter le champ catégorie")]
     private $marescategorie;
 
+    #[ORM\OneToMany(targetEntity: Legendes::class, mappedBy: 'mare', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private $legendes;
+
+    #[ORM\ManyToMany(targetEntity: Plantes::class, inversedBy: "mares")]
+    private $plantes;
+
     public function __construct()
     {
         $this->created = new \DateTime();
         $this->isActive = true;
+        $this->legendes = new ArrayCollection();
+        $this->plantes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +212,60 @@ class Mares
     public function setMarescategorie(?MaresCategories $marescategorie): static
     {
         $this->marescategorie = $marescategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Legendes>
+     */
+    public function getLegendes(): Collection
+    {
+        return $this->legendes;
+    }
+
+    public function addLegende(Legendes $legende): static
+    {
+        if (!$this->legendes->contains($legende)) {
+            $this->legendes->add($legende);
+            $legende->setMare($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLegende(Legendes $legende): static
+    {
+        if ($this->legendes->removeElement($legende)) {
+            // set the owning side to null (unless already changed)
+            if ($legende->getMare() === $this) {
+                $legende->setMare(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Plantes>
+     */
+    public function getPlantes(): Collection
+    {
+        return $this->plantes;
+    }
+
+    public function addPlante(Plantes $plante): static
+    {
+        if (!$this->plantes->contains($plante)) {
+            $this->plantes->add($plante);
+        }
+
+        return $this;
+    }
+
+    public function removePlante(Plantes $plante): static
+    {
+        $this->plantes->removeElement($plante);
 
         return $this;
     }

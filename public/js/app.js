@@ -35,5 +35,17 @@ $( document ).ready(function() {
       nav:false,
     });
 
+    $('.beforeAfter').beforeAfter({
+      movable: true,
+      clickMove: true,
+      position: 50,
+      opacity:1,
+      activeOpacity: 1,
+      hoverOpacity: 1,
+      separatorColor:'#0095B5',
+      arrowColor:'#0095B5',
+      separatorColor: '#0095B5',
+  });
+
 });
 

@@ -33,4 +33,32 @@ class MaresRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getMares($categorie = null)
+    {
+        $qb = $this->createQueryBuilder('m');
+
+        $qb->andWhere('m.isActive =  :isActive')
+            ->setParameter('isActive', true);
+
+        if(!is_null($categorie)){
+            $qb->andWhere('m.marescategorie = :categorie')
+                ->setParameter('categorie', $categorie);
+        }
+
+        $qb->orderBy('m.id', 'DESC');
+   
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findPlantesByMareId($mareId)
+    {
+        $mare = $this->find($mareId);
+    
+        if ($mare) {
+            return $mare->getPlantes()->toArray();
+        }
+    
+        return null;
+    }
+
 }

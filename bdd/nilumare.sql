@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 05 jan. 2025 à 18:57
+-- Généré le : dim. 12 jan. 2025 à 16:31
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -113,22 +113,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20241118111430', '2024-11-18 11:14:33', 11),
-('DoctrineMigrations\\Version20241124114722', '2024-11-24 11:47:29', 111),
-('DoctrineMigrations\\Version20241124120823', '2024-11-24 12:08:28', 100),
-('DoctrineMigrations\\Version20241124121358', '2024-11-24 12:14:00', 14),
-('DoctrineMigrations\\Version20241124144220', '2024-11-24 14:42:26', 41),
-('DoctrineMigrations\\Version20241124145113', '2024-11-24 14:51:17', 26),
-('DoctrineMigrations\\Version20241124145704', '2024-11-24 14:57:08', 87),
-('DoctrineMigrations\\Version20241124152705', '2024-11-24 15:27:11', 96),
-('DoctrineMigrations\\Version20241124153224', '2024-11-24 15:32:27', 14),
-('DoctrineMigrations\\Version20241124153914', '2024-11-24 15:39:21', 72),
-('DoctrineMigrations\\Version20241124154507', '2024-11-24 15:45:16', 16),
-('DoctrineMigrations\\Version20241124173655', '2024-11-24 17:36:57', 19),
-('DoctrineMigrations\\Version20241205110033', '2024-12-05 11:00:40', 99),
-('DoctrineMigrations\\Version20241205155640', '2024-12-05 15:56:45', 193),
-('DoctrineMigrations\\Version20250105172825', '2025-01-05 17:28:36', 90),
-('DoctrineMigrations\\Version20250105173906', '2025-01-05 17:39:11', 10);
+('DoctrineMigrations\\Version20250112160628', '2025-01-12 16:06:34', 76);
 
 -- --------------------------------------------------------
 
@@ -155,6 +140,33 @@ CREATE TABLE IF NOT EXISTS `headers` (
 
 INSERT INTO `headers` (`id`, `created`, `changed`, `title`, `image`, `is_active`, `link`, `resume`) VALUES
 (1, '2024-11-25 17:42:43', NULL, 'Harmonie naturelle :  des mares éco-responsables pour sublimer votre jardin !', 'rectangle-1-1732556563.jpg', 1, 'https://opalcollection.net/en/', 'Grâce à notre expertise, nous réalisons des écosystèmes qui allient beauté et préservation de l’environnement, tout en répondant aux attentes spécifiques de nos clients.');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `legende`
+--
+
+DROP TABLE IF EXISTS `legende`;
+CREATE TABLE IF NOT EXISTS `legende` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `mare_id` int NOT NULL,
+  `created` datetime NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `resume` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D0A91634A24F8618` (`mare_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `legende`
+--
+
+INSERT INTO `legende` (`id`, `mare_id`, `created`, `title`, `url`, `resume`) VALUES
+(1, 4, '2025-01-12 10:37:37', 'Le nénuphar', '6c9679fa16ffa68f6e5f6fe77c86f1ae-1736696125.jpg', '(Nymphaea), qui offre un abri pour les animaux aquatiques et contribue à l’oxygénation de l’eau.'),
+(2, 4, '2025-01-12 10:57:39', 'La massette', '6c9679fa16ffa68f6e5f6fe77c86f1ae-1736696126.jpg', '(Typha), une plante émergente qui favorise la filtration naturelle de l’eau.'),
+(3, 4, '2025-01-12 10:57:59', 'Le jonc épars', '6c9679fa16ffa68f6e5f6fe77c86f1ae-1736696126.jpg', '(Juncus effusus), qui aide à stabiliser les berges et à prévenir l’érosion.');
 
 -- --------------------------------------------------------
 
@@ -211,10 +223,10 @@ CREATE TABLE IF NOT EXISTS `mares` (
 --
 
 INSERT INTO `mares` (`id`, `created`, `changed`, `title`, `slug`, `resume`, `content`, `imageavant`, `is_active`, `image`, `imageapres`, `marescategorie_id`) VALUES
-(1, '2024-12-03 16:53:45', '2024-12-03 16:56:15', 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-10-1733244904.jpg', 1, 'rectangle-10-1733244904.jpg', 'rectangle-10-1733244904.jpg', 1),
-(2, '2024-12-03 16:57:12', NULL, 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-11-1733245032.jpg', 1, 'rectangle-11-1733245032.jpg', 'rectangle-11-1733245032.jpg', 2),
-(3, '2024-12-03 16:57:59', NULL, 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-12-1733245079.jpg', 1, 'rectangle-12-1733245079.jpg', 'rectangle-12-1733245079.jpg', 3),
-(4, '2024-12-03 16:58:43', NULL, 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-13-1733245123.jpg', 1, 'rectangle-13-1733245123.jpg', 'rectangle-13-1733245123.jpg', 3);
+(1, '2024-12-03 16:53:45', '2025-01-11 13:24:19', 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'tata-1736601858.jpg', 1, 'rectangle-10-1733244904-1736601788.jpg', 'rectangle-11-1733245032-1736601858.jpg', 1),
+(2, '2024-12-03 16:57:12', '2025-01-11 13:24:06', 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'tata-1736601846.jpg', 1, 'rectangle-11-1733245032-1736601761.jpg', 'rectangle-10-1733244904-1736601846.jpg', 2),
+(3, '2024-12-03 16:57:59', '2025-01-11 13:23:49', 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-10-1733244904-1736601828.jpg', 1, 'tata-1736601741.jpg', 'rectangle-11-1733245032-1736601828.jpg', 3),
+(4, '2024-12-03 16:58:43', '2025-01-12 16:30:00', 'Les nénuphars : joyaux aquatiques pour sublimer vos mares', 'les-nenuphars-joyaux-aquatiques-pour-sublimer-vos-mares', 'Les nénuphars ajoutent une élégance naturelle à vos mares grâce à leurs fleurs colorées et leurs larges feuilles flottantes. En plus d’être esthétiques, ils contribuent à l’équilibre de l’écosystème en offrant un abri à la faune aquatique et en améliorant', '<p>Les n&eacute;nuphars ajoutent une &eacute;l&eacute;gance naturelle &agrave; vos mares gr&acirc;ce &agrave; leurs fleurs color&eacute;es et leurs larges feuilles flottantes. En plus d&rsquo;&ecirc;tre esth&eacute;tiques, ils contribuent &agrave; l&rsquo;&eacute;quilibre de l&rsquo;&eacute;cosyst&egrave;me en offrant un abri &agrave; la faune aquatique et en am&eacute;liorant la qualit&eacute; de l&rsquo;eau. Ces plantes, id&eacute;ales pour les mares &eacute;co-responsables, favorisent la biodiversit&eacute; tout en cr&eacute;ant un cadre apaisant et harmonieux.</p>', 'rectangle-12-1733245079-1736601240.jpg', 1, 'tata-1736601621.jpg', 'tata-1736601640.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -245,6 +257,31 @@ INSERT INTO `marescategorie` (`id`, `created`, `changed`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `mares_plantes`
+--
+
+DROP TABLE IF EXISTS `mares_plantes`;
+CREATE TABLE IF NOT EXISTS `mares_plantes` (
+  `mares_id` int NOT NULL,
+  `plantes_id` int NOT NULL,
+  PRIMARY KEY (`mares_id`,`plantes_id`),
+  KEY `IDX_4F7F5896F4BF6AF5` (`mares_id`),
+  KEY `IDX_4F7F589649B7AC79` (`plantes_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `mares_plantes`
+--
+
+INSERT INTO `mares_plantes` (`mares_id`, `plantes_id`) VALUES
+(4, 1),
+(4, 3),
+(4, 4),
+(4, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `planteimage`
 --
 
@@ -252,7 +289,7 @@ DROP TABLE IF EXISTS `planteimage`;
 CREATE TABLE IF NOT EXISTS `planteimage` (
   `id` int NOT NULL AUTO_INCREMENT,
   `plante_id` int NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_9306B91C177B16E8` (`plante_id`)
@@ -392,10 +429,23 @@ INSERT INTO `user` (`id`, `email`, `nom`, `prenom`, `roles`, `password`, `is_act
 --
 
 --
+-- Contraintes pour la table `legende`
+--
+ALTER TABLE `legende`
+  ADD CONSTRAINT `FK_D0A91634A24F8618` FOREIGN KEY (`mare_id`) REFERENCES `mares` (`id`);
+
+--
 -- Contraintes pour la table `mares`
 --
 ALTER TABLE `mares`
   ADD CONSTRAINT `FK_A2E9D7DD5927A2C6` FOREIGN KEY (`marescategorie_id`) REFERENCES `marescategorie` (`id`);
+
+--
+-- Contraintes pour la table `mares_plantes`
+--
+ALTER TABLE `mares_plantes`
+  ADD CONSTRAINT `FK_4F7F589649B7AC79` FOREIGN KEY (`plantes_id`) REFERENCES `plantes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_4F7F5896F4BF6AF5` FOREIGN KEY (`mares_id`) REFERENCES `mares` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `planteimage`

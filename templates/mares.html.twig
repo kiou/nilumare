@@ -1,0 +1,67 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>Création & Conception de bassin</title>{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header4.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>Création & Conception de bassin</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Les deniéres mares #}
+    <section class="section section15 section15Page">
+        <div class="inner">
+
+            {# Catégories liste #}
+            <div class="categoriesListe">
+                <ul>
+                    <li><a href="{{ path('app_mares_index') }}">Toutes</a></li>
+                    {% for marecategorie in marescategorie %}
+                        <li><a href="{{ path('app_mares_index',{'categorie': marecategorie.id}) }}">{{ marecategorie.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# Mares liste #}
+            <div class="maresListe">
+                {% for mare in mares %}
+                    <div class="mareListe page">
+                        <div class="mareListeContainer">
+                            <div class="mareListeImg">
+                                <img src="{{ asset('img/miniature/' ~ mare.image) }}">
+                            </div>
+                            <div class="mareListeContent">
+                                <div class="mareListeTitle">
+                                    <h4>{{ mare.title }}</h4>
+                                </div>
+
+                                <div class="mareListeBtn">
+                                    <a href="{{ path('app_mares_show',{'slug': mare.slug, 'id': mare.id})}}" class="btn link">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="background3"><img src="{{ asset('img/background3.png') }}"></div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}

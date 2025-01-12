@@ -21,5 +21,12 @@ class MaresCategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, MaresCategories::class);
     }
 
+    public function getMaresCategorie()
+    {
+        $qb = $this->createQueryBuilder('c');
 
+        $qb->orderBy('c.id', 'DESC');
+   
+        return $qb->getQuery()->getResult();
+    }
 }

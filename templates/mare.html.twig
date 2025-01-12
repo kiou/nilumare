@@ -1,0 +1,114 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>{{ mare.title }}</title>{% endblock %}
+{% block metadescription %} <meta name="description" content="{{ mare.resume }}">{% endblock %}
+
+{% block opengraph %}
+    <meta property="og:title" content="Nilumare - {{ mare.title }}">
+    <meta property="og:description" content="{{ mare.resume }}">
+    <meta property="og:url" content="#base{{app.request.getBaseURL() ~ path('app_mares_show',{'slug': mare.slug, 'id': mare.id})}}">
+    <meta property="og:image" content="#base{{ asset('img/upload/' ~ mare.image) }}">
+{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image: url({{ asset('img/upload/' ~ mare.image) }});">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>{{ mare.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section16">
+        <div class="inner">
+            <div class="mareContent pageContent">
+                {{ mare.content|raw }}
+            </div>
+
+            {% if mare.imageavant is not null and mare.imageapres is not null %}
+                <div class="beforeAfterTitle">
+                    <h2>avant</h2>
+                    <h2>aprés</h2>
+                </div>
+
+                <div class="beforeAfter">
+                    <img src="{{ asset('img/upload/' ~ mare.imageavant) }}">
+                    <img src="{{ asset('img/upload/' ~ mare.imageapres) }}">
+                </div>
+            {% endif %}
+
+            {% if mare.legendes|length > 0 %}
+                <div class="legendes">
+                    {% for legende in mare.legendes %}
+                        <div class="legende">
+                            <div class="legendeImage">
+                                <img src="{{ asset('img/miniature/' ~ legende.url) }}">
+                            </div>
+                            <div class="legendeContent">
+                                <p><strong>{{ legende.title }}</strong> {{ legende.resume }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {% if plantes|length > 0 %}
+        <section class="section section17">
+            <div class="inner">
+
+                <div class="titre">
+                    <h2>Découvrez la diversité des plantes aquatiques pour cette mare</h2>
+                </div>
+
+                {# Catégories liste #}
+                <div class="categoriesListe">
+                    <ul>
+                        <li><a href="{{ path('app_plantes_index') }}">Toutes</a></li>
+                        {% for plantecategorie in plantescategorie %}
+                            <li><a href="{{ path('app_plantes_index',{'categorie': plantecategorie.id}) }}">{{ plantecategorie.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {# Plantes liste #}
+                <div class="plantesListe">
+                    {% for plante in plantes %}
+                        <div class="planteListe page">
+                            <div class="planteListeContainer">
+                                <div class="planteListeImg">
+                                    <img src="{{ asset('img/miniature/' ~ plante.image) }}">
+                                </div>
+                                <div class="planteListeContent">
+                                    <div class="planteListeTitle">
+                                        <h4>{{ plante.title }}</h4>
+                                    </div>
+
+                                    <div class="planteListeResume">
+                                        <p>{{ plante.resume|truncate(70) }}</p>
+                                    </div>
+
+                                    <div class="planteListeBtn">
+                                        <a href="{{ path('app_plantes_show',{'slug': plante.slug, 'id': plante.id})}}" class="btn link">Voir la plante</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+    {% endif %}
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+{% endblock %}

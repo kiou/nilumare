@@ -38,3 +38,18 @@ app_contact_index:
 sendcontact:
     path: contact-validation
     controller: App\Controller\ContactController::send
+
+app_mares_index:
+    path: /creation-conception-de-bassin/{categorie}
+    controller: App\Controller\MareController::index
+    requirements:
+        categorie: '\d*'
+    defaults:
+        categorie: null
+
+app_mares_show:
+    path:     /mare/{slug}/{id}
+    defaults: { _controller: App\Controller\MareController::show }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+

@@ -6,6 +6,8 @@ use App\Entity\Mares;
 use Imagine\Image\Box;
 use Imagine\Gd\Imagine;
 use App\Utilities\Upload;
+use App\Form\Type\ImageTypeLegende;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -17,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -73,10 +76,17 @@ class MaresCrudController extends AbstractCrudController
                 );
 
                 $imagine = new Imagine();
+                $size = new Box(1920,550);
+                $imagine->open($file)
+                        ->thumbnail($size, 'outbound')
+                        ->save($this->getUploadRootDir().'upload/'.$image);
+
+                $imagine = new Imagine();
                 $size = new Box(570,370);
                 $imagine->open($file)
                         ->thumbnail($size, 'outbound')
                         ->save($this->getUploadRootDir().'miniature/'.$image);
+
         });
         yield ImageField::new('imageavant','Image avant')
             ->setHelp('1920 pixel de large et 960 pixel de haut')
@@ -122,7 +132,38 @@ class MaresCrudController extends AbstractCrudController
         yield TextEditorField::new('content','Contenu')
             ->hideOnIndex()
             ->setFormType(CKEditorType::class);   
+        yield CollectionField::new('legendes','Légendes')
+            ->setEntryType(ImageTypeLegende::class)
+            ->setFormTypeOptions([
+                'by_reference' => false,
+            ])
+            ->onlyOnForms();
+        yield AssociationField::new('plantes', 'Plante(s) en relation')
+            ->setFormTypeOption('by_reference', false)
+            ->hideOnIndex();
         yield BooleanField::new('isActive','Actif');
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        foreach ($entityInstance->getLegendes() as $legendes) {
+            $legendes->upload();
+            $legendes->setMare($entityInstance);
+            $entityManager->persist($legendes);
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        foreach ($entityInstance->getLegendes() as $legendes) {
+            $legendes->upload();
+            $legendes->setMare($entityInstance);
+            $entityManager->persist($legendes);
+        }
+
+        parent::updateEntity($entityManager, $entityInstance);
     }
 
     public function getUploadRootDir()
