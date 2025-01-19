@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 12 jan. 2025 à 16:31
+-- Généré le : dim. 19 jan. 2025 à 17:02
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -113,7 +113,9 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20250112160628', '2025-01-12 16:06:34', 76);
+('DoctrineMigrations\\Version20250112160628', '2025-01-12 16:06:34', 76),
+('DoctrineMigrations\\Version20250119145519', '2025-01-19 14:55:24', 69),
+('DoctrineMigrations\\Version20250119153922', '2025-01-19 15:39:26', 70);
 
 -- --------------------------------------------------------
 
@@ -369,6 +371,60 @@ INSERT INTO `plantescategorie` (`id`, `created`, `changed`, `name`) VALUES
 (3, '2024-11-24 15:09:07', NULL, 'Jardin'),
 (4, '2024-11-24 15:09:26', NULL, 'Biodiversité'),
 (5, '2024-11-24 15:09:26', NULL, 'Lutte contre les moustiques');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pourquois`
+--
+
+DROP TABLE IF EXISTS `pourquois`;
+CREATE TABLE IF NOT EXISTS `pourquois` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created` datetime NOT NULL,
+  `changed` datetime DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `is_accueil` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `pourquois`
+--
+
+INSERT INTO `pourquois` (`id`, `created`, `changed`, `title`, `image`, `content`, `is_active`, `is_accueil`) VALUES
+(1, '2025-01-19 15:44:29', '2025-01-19 16:26:26', 'Une mare au cœur du jardin :  un écosystème vivant et esthétique', 'aaaa-1737301496.jpg', '<p>Int&eacute;grer une mare &eacute;cologique dans votre jardin transforme celui-ci en un espace vivant et dynamique.<br />\r\n<br />\r\nNon seulement elle ajoute une touche naturelle et apaisante, mais elle devient aussi un v&eacute;ritable point focal, o&ugrave; la flore et la faune cohabitent harmonieusement. Les plantes aquatiques se m&ecirc;lent aux v&eacute;g&eacute;taux traditionnels, cr&eacute;ant une transition douce entre les zones s&egrave;ches et humides du jardin.<br />\r\n<br />\r\nCet am&eacute;nagement encourage un jardinage plus respectueux de l&rsquo;environnement, tout en offrant un cadre visuellement riche et en constante &eacute;volution, invitant &agrave; l&rsquo;observation et &agrave; la d&eacute;couverte.</p>', 1, 0),
+(2, '2025-01-19 16:23:57', NULL, 'Le murmure apaisant de l’eau :  une symphonie naturelle pour  votre espace', 'bbbbbbb-1737303837.jpg', '<p>Le doux bruit de l&rsquo;eau qui s&rsquo;&eacute;coule d&rsquo;une mare &eacute;cologique apporte une atmosph&egrave;re sereine et apaisante &agrave; votre espace ext&eacute;rieur.<br />\r\n<br />\r\nCe murmure constant cr&eacute;e un fond sonore relaxant qui aide &agrave; masquer les bruits environnants, favorisant ainsi une v&eacute;ritable parenth&egrave;se de tranquillit&eacute;. En plus d&rsquo;&ecirc;tre agr&eacute;able pour l&rsquo;oreille, le bruit de l&rsquo;eau a des effets b&eacute;n&eacute;fiques sur le bien-&ecirc;tre mental, r&eacute;duisant le stress et invitant &agrave; la d&eacute;tente.<br />\r\n<br />\r\nIl devient une v&eacute;ritable symphonie naturelle, parfaitement int&eacute;gr&eacute;e &agrave; l&rsquo;environnement, tout en renfor&ccedil;ant l&rsquo;harmonie du lieu.</p>', 1, 0),
+(3, '2025-01-19 16:24:39', NULL, 'Une mare au cœur du jardin :  un écosystème vivant et esthétique', 'vvvvvvvv-1737303879.jpg', '<p>Int&eacute;grer une mare &eacute;cologique dans votre jardin transforme celui-ci en un espace vivant et dynamique.<br />\r\n<br />\r\nNon seulement elle ajoute une touche naturelle et apaisante, mais elle devient aussi un v&eacute;ritable point focal, o&ugrave; la flore et la faune cohabitent harmonieusement. Les plantes aquatiques se m&ecirc;lent aux v&eacute;g&eacute;taux traditionnels, cr&eacute;ant une transition douce entre les zones s&egrave;ches et humides du jardin.<br />\r\n<br />\r\nCet am&eacute;nagement encourage un jardinage plus respectueux de l&rsquo;environnement, tout en offrant un cadre visuellement riche et en constante &eacute;volution, invitant &agrave; l&rsquo;observation et &agrave; la d&eacute;couverte.</p>', 1, 0),
+(4, '2025-01-19 16:25:32', '2025-01-19 16:26:30', 'Biodiversité florissante : un refuge naturel pour la faune et la flore', 'ssssssss-1737303932.jpg', '<p>Une mare &eacute;cologique joue un r&ocirc;le essentiel dans la promotion de la biodiversit&eacute;. V&eacute;ritable oasis pour de nombreuses esp&egrave;ces, elle attire une grande vari&eacute;t&eacute; d&rsquo;insectes, d&rsquo;amphibiens, d&rsquo;oiseaux et de petits animaux, tout en favorisant la croissance de plantes indig&egrave;nes.<br />\r\n<br />\r\nCe micro-habitat cr&eacute;e un &eacute;cosyst&egrave;me &eacute;quilibr&eacute;, o&ugrave; chaque esp&egrave;ce trouve sa place et participe &agrave; la vitalit&eacute; de l&rsquo;ensemble. En offrant un refuge s&ucirc;r et des ressources naturelles, la mare &eacute;cologique devient un &eacute;l&eacute;ment cl&eacute; pour pr&eacute;server la biodiversit&eacute; locale, contribuant ainsi &agrave; la sant&eacute; de l&rsquo;environnement global.</p>', 1, 1),
+(5, '2025-01-19 16:26:12', NULL, 'Biodiversité florissante : un refuge naturel pour la faune et la flore', 'fggggggg-1737303972.jpg', '<p>Une mare &eacute;cologique joue un r&ocirc;le essentiel dans la promotion de la biodiversit&eacute;. V&eacute;ritable oasis pour de nombreuses esp&egrave;ces, elle attire une grande vari&eacute;t&eacute; d&rsquo;insectes, d&rsquo;amphibiens, d&rsquo;oiseaux et de petits animaux, tout en favorisant la croissance de plantes indig&egrave;nes.<br />\r\n<br />\r\nCe micro-habitat cr&eacute;e un &eacute;cosyst&egrave;me &eacute;quilibr&eacute;, o&ugrave; chaque esp&egrave;ce trouve sa place et participe &agrave; la vitalit&eacute; de l&rsquo;ensemble. En offrant un refuge s&ucirc;r et des ressources naturelles, la mare &eacute;cologique devient un &eacute;l&eacute;ment cl&eacute; pour pr&eacute;server la biodiversit&eacute; locale, contribuant ainsi &agrave; la sant&eacute; de l&rsquo;environnement global.</p>', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `propos`
+--
+
+DROP TABLE IF EXISTS `propos`;
+CREATE TABLE IF NOT EXISTS `propos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created` datetime NOT NULL,
+  `changed` datetime DEFAULT NULL,
+  `contenuaccueil` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titirepage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contenupage` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `propos`
+--
+
+INSERT INTO `propos` (`id`, `created`, `changed`, `contenuaccueil`, `titirepage`, `contenupage`) VALUES
+(1, '2025-01-19 15:02:49', '2025-01-19 16:33:37', '<h3>A poropos de Nilumare</h3>\r\n\r\n<p>Maecenas vitae enim massa. Etiam consectetur tempor aliquam. Donec ultricies turpis non ex sodales, quis auctor ex dictum. Aenean eget orci libero. Vivamus auctor suscipit ante sed consequat. Fusce non felis quis purus rhoncus luctus. Mauris et turpis mattis, faucibus eros vel, venenatis tortor. Ut vel metus sit amet est pellentesque eleifend. Donec non libero facilisis, efficitur nisi ac, egestas ipsum.</p>\r\n\r\n<p>Donec sit amet mauris feugiat, elementum est vel, sagittis massa. Vestibulum massa mi, posuere nec facilisis ut, vestibulum in arcu. Sed lobortis eu ante sed eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat turpis sit amet quam sollicitudin, id egestas mi venenatis. Nulla eget dolor dolor. Suspendisse tempor felis dignissim metus iaculis, quis convallis lorem imperdiet. Suspendisse vestibulum bibendum massa, id iaculis lacus condimentum nec.</p>\r\n\r\n<p>Cras vel dui tortor. Fusce ac congue arc</p>', 'A poropos de Nilumare', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacinia gravida elementum. In in neque hendrerit nunc ultrices interdum id vitae lacus. Proin a libero eu quam imperdiet porta vitae eu nisi. Donec tincidunt a purus ut semper. Aliquam iaculis sapien eget condimentum mattis. Praesent eget nisl luctus, malesuada ante et, ornare nunc. Sed id purus sed tortor cursus tempus eu quis est. Duis finibus arcu a nisi elementum, vehicula rutrum nibh semper. Proin auctor, elit eget gravida aliquam, nibh mi tincidunt lectus, quis semper metus ligula pulvinar leo.</p>\r\n\r\n<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut convallis sed libero a tincidunt. Quisque quis erat eget leo pellentesque posuere. Phasellus ut justo mattis, iaculis ante vitae, tempor eros. Sed luctus facilisis fermentum. Donec rhoncus gravida ante, nec venenatis urna auctor eu. In ut odio purus. Aenean et erat maximus, interdum ante non, porta neque.</p>\r\n\r\n<p>Maecenas vitae enim massa. Etiam consectetur tempor aliquam. Donec ultricies turpis non ex sodales, quis auctor ex dictum. Aenean eget orci libero. Vivamus auctor suscipit ante sed consequat. Fusce non felis quis purus rhoncus luctus. Mauris et turpis mattis, faucibus eros vel, venenatis tortor. Ut vel metus sit amet est pellentesque eleifend. Donec non libero facilisis, efficitur nisi ac, egestas ipsum.</p>\r\n\r\n<p>Donec sit amet mauris feugiat, elementum est vel, sagittis massa. Vestibulum massa mi, posuere nec facilisis ut, vestibulum in arcu. Sed lobortis eu ante sed eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat turpis sit amet quam sollicitudin, id egestas mi venenatis. Nulla eget dolor dolor. Suspendisse tempor felis dignissim metus iaculis, quis convallis lorem imperdiet. Suspendisse vestibulum bibendum massa, id iaculis lacus condimentum nec.</p>\r\n\r\n<p>Cras vel dui tortor. Fusce ac congue arcu. Nunc pharetra erat at massa eleifend, vitae vulputate leo porttitor. Nulla scelerisque faucibus congue. Sed aliquet magna velit, a dapibus elit semper eu. Nam quis nisi tempus, rutrum turpis ac, euismod massa. Etiam ultrices, urna ac consectetur venenatis, ligula metus rutrum felis, eu gravida justo massa eget nulla. Aenean volutpat ultricies mi, ut convallis mi porta a. In hac habitasse platea dictumst.</p>');
 
 -- --------------------------------------------------------
 

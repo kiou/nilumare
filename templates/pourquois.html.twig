@@ -1,0 +1,48 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>Pourquoi une mare</title>{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header6.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>Pourquoi une mare</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section20">
+        <div class="inner">
+            <div class="pourquois">
+                {% for pourquoi in pourquois %}
+                    <div class="pourquoiContainer  {% if loop.index is even %}inverse{% endif %}">
+                        <div class="pourquoi  {% if loop.index is even %}inverse{% endif %}">
+                            <div class="pourquoiLeft">
+                                <img src="{{ asset('img/miniature/' ~ pourquoi.image) }}">
+                                <div class="pourquoiBulleBottom"></div>
+                                <div class="pourquoiBulleTop"></div>
+                            </div>
+
+                            <div class="pourquoiRight">
+                                <h3>{{ pourquoi.title }}</h3>
+                                <div class="pourquoiContent pageContent">
+                                    {{ pourquoi.content|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+{% endblock %}

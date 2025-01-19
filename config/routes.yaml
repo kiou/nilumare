@@ -53,3 +53,11 @@ app_mares_show:
     requirements:
         slug: ([a-z-0-9]*)
         id: \d+
+
+app_propos_index:
+    path: /a-propos
+    controller: App\Controller\ProposController::index
+
+app_pourquoi_index:
+    path: /pourquoi-une-mare
+    controller: App\Controller\PourquoisController::index

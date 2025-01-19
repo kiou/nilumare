@@ -3,8 +3,10 @@ namespace App\Controller;
 
 use App\Repository\LogoRepository;
 use App\Repository\MaresRepository;
+use App\Repository\ProposRepository;
 use App\Repository\HeadersRepository;
 use App\Repository\PlantesRepository;
+use App\Repository\PourquoisRepository;
 use App\Repository\StatistiquesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\PlantesCategorieRepository;
@@ -19,6 +21,8 @@ class GlobalController extends AbstractController
     private $PlantesRepository;
     private $MaresRepository;
     private $StatistiquesRepository;
+    private $ProposRepository;
+    private $PourquoisRepository;
 
     public function __construct(
             LogoRepository $LogoRepository,
@@ -27,6 +31,8 @@ class GlobalController extends AbstractController
             PlantesRepository $PlantesRepository,
             MaresRepository $MaresRepository,
             StatistiquesRepository $StatistiquesRepository,
+            ProposRepository $ProposRepository,
+            PourquoisRepository $PourquoisRepository
         )
     {
         $this->HeadersRepository = $HeadersRepository;
@@ -35,6 +41,8 @@ class GlobalController extends AbstractController
         $this->PlantesRepository = $PlantesRepository;
         $this->MaresRepository = $MaresRepository;
         $this->StatistiquesRepository = $StatistiquesRepository;
+        $this->ProposRepository = $ProposRepository;
+        $this->PourquoisRepository = $PourquoisRepository;
     }
 
     public function index(
@@ -47,6 +55,8 @@ class GlobalController extends AbstractController
         $plantes = $this->PlantesRepository->getPlantes();
         $mares = $this->MaresRepository->getAccueilMare();
         $statistiques = $this->StatistiquesRepository->getAccueilStatistiques();
+        $propos = $this->ProposRepository->findLast();
+        $pourquois = $this->PourquoisRepository->findAllPourquois('accueil');
 
         return $this->render('index.html.twig',[
             'action' => 'accueil',
@@ -55,7 +65,9 @@ class GlobalController extends AbstractController
             'plantescategorie' => $plantescategorie,
             'plantes' => $plantes,
             'mares' => $mares,
-            'statistiques' => $statistiques
+            'statistiques' => $statistiques,
+            'propos' => $propos,
+            'pourquois' => $pourquois
         ]);
     }
 

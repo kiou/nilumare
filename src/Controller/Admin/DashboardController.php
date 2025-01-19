@@ -7,8 +7,10 @@ use App\Entity\User;
 use App\Entity\Avant;
 use App\Entity\Block;
 use App\Entity\Mares;
+use App\Entity\Propos;
 use App\Entity\Headers;
 use App\Entity\Plantes;
+use App\Entity\Pourquois;
 use App\Entity\Actualites;
 use App\Entity\Statistiques;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,6 +54,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Actualités', 'fas fa-dot-circle', Actualites::class)->setDefaultSort(['id' => 'DESC']);
         yield MenuItem::linkToCrud('Statistiques', 'fas fa-dot-circle', Statistiques::class)->setDefaultSort(['id' => 'DESC']);
         yield MenuItem::linkToCrud('Mise en avant', 'fas fa-dot-circle', Avant::class)->setDefaultSort(['id' => 'DESC']);
+        yield MenuItem::linkToCrud('A propos', 'fas fa-dot-circle', Propos::class)->setDefaultSort(['id' => 'DESC']);
+        yield MenuItem::linkToCrud('Pourquoi une mare', 'fas fa-dot-circle', Pourquois::class)->setDefaultSort(['id' => 'DESC']);
+
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu

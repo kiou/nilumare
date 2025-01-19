@@ -161,7 +161,7 @@
 
 .section2 .inner {
     max-width: 1170px;
-    padding: 350px 0px;
+    padding: 90px 0px 300px 0px;
 }
 
 .background1{
@@ -408,7 +408,7 @@
 
 /* A propos */
 .section6 .inner{
-    padding: 120px 0px;
+    padding: 230px 0px;
     max-width: 1170px;
 }
 
@@ -816,4 +816,76 @@
     max-width: 1170px;
     z-index: 3;
     padding-bottom: 80px;
+}
+
+/* Pourquoi une mare */ 
+.pourquoi{
+    display:flex;
+    flex-direction: row;
+}
+
+.pourquoiLeft{
+    width: 35%;
+    position: relative;
+}
+
+.pourquoiLeft img{
+    width: 100%;
+    display: block;
+    box-shadow: 0px 20px 60px 0px rgba(26, 37, 14, 0.20);
+    border-radius: 30px 200px 30px 100px;
+    position: relative;
+    z-index: 3;
+}
+
+.pourquoiRight{
+    width: calc(65% - 100px);
+    padding-left: 100px;
+}
+
+.pourquoiBulleTop{
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    width: 196px;
+    height: 196px;
+    border-radius: 100%;
+    background-color: #597A2B;
+    z-index: 1;
+}
+
+.pourquoiBulleBottom{
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 366px;
+    height: 366px;
+    border-radius: 100%;
+    background-color: #9ABF5C;
+    z-index: 1;
+}
+
+/* Page des pourquois */
+.section20 .inner {
+    padding: 60px 0px;
+}
+
+.section20 .pourquoi{
+    margin: 0px auto;
+    max-width: 1170px;
+    padding: 110px 0px 150px 0px;
+}
+
+.pourquoi.inverse {
+    flex-direction: row-reverse;
+}
+
+.pourquoiContainer.inverse{
+    background-color: #FAFCF5;
+}
+
+.pourquoi.inverse .pourquoiRight {
+    width: calc(65% - 140px);
+    padding-left: 0px;
+    padding-right: 140px;
 }

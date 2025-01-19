@@ -32,7 +32,12 @@
     {# Mise en avant a propos block #}
     <section class="section section2">
         <div class="inner">
-            <p>Mise en avant (à faire)</p>
+            <div class="proposAccueil pageContent blanc">
+                {{ propos.contenuaccueil|raw }}
+            </div>
+            <div class="proposbtn">
+                <a href="{{ path('app_propos_index') }}" class="btn">En savoir plus</a>
+            </div>
             <div class="background2"><img src="{{ asset('img/background2.png') }}"></div>
         </div>
 
@@ -143,10 +148,28 @@
         <div class="background1"><img src="{{ asset('img/background1.png') }}"></div>
     </section>
 
-    {# A propos #}
+    {# Pourquoi une mare #}
     <section class="section section6">
         <div class="inner">
-            <p>A propos (à faire)</p>
+            <div class="pourquois">
+                <div class="pourquoi">
+                    <div class="pourquoiLeft">
+                        <img src="{{ asset('img/miniature/' ~ pourquois.image) }}">
+                        <div class="pourquoiBulleBottom"></div>
+                        <div class="pourquoiBulleTop"></div>
+                    </div>
+
+                    <div class="pourquoiRight">
+                        <h3>{{ pourquois.title }}</h3>
+                        <div class="pourquoiContent pageContent">
+                            {{ pourquois.content|raw }}
+                        </div>
+                        <div class="pourquoiBtn">
+                            <a href="{{ path('app_pourquoi_index') }}" class="btn bleu">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="background4"><img src="{{ asset('img/background4.png') }}"></div>

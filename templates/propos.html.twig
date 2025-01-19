@@ -1,0 +1,37 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block title %} <title>{{ propos.titirepage }}</title>{% endblock %}
+
+{% block opengraph %}
+    <meta property="og:title" content="Nilumare - {{ propos.titirepage }}">
+    <meta property="og:url" content="#base{{app.request.getBaseURL() ~ path('app_propos_index') }}">
+{% endblock %}
+
+{% block content %}
+
+    {# En tête Page #}
+    <section class="section headerPage">
+        <div class="inner">
+            <div class="headerPageContent"  style="background-image:url({{ asset('img/header5.png') }})">
+                <div class="headerPageTitle">
+                    <div class="headerPageTitleInner">
+                        <h1>{{ propos.titirepage }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section13 pageContent">
+        <div class="inner">
+            {{ propos.contenupage|raw }}
+        </div>
+    </section>
+
+    {# Mise en avant #}
+    {{ render(controller('App\\Controller\\AvantController::view')) }} 
+
+    {# Actualites #}
+    {{ render(controller('App\\Controller\\ActualiteController::view')) }} 
+
+{% endblock %}
